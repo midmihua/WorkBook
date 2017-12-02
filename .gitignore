@@ -1,0 +1,16 @@
+*.sqlite3
+*.pyc
+*.py~
+*.tpl~
+
+.idea
+.vagrant
+.venv
+.venv_profcomp
+.gitignore~
+migrations
+dist
+venv_profcomp
+dump
+static
+
