@@ -13,4 +13,4 @@ dist
 venv_profcomp
 dump
 static
-
+_config.py
