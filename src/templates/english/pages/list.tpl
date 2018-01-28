@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<p>English dairy</p>
+<p>List of words</p>
 
 <p><a href="{% url 'english:add_words' %}">New word</a></p>
 

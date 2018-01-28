@@ -8,7 +8,8 @@ from .models import Words
 class WordsAdmin(admin.ModelAdmin):
 
     list_display = ['word', 'translation', 'comment']
-    list_filter = ['word']
+    list_filter = ['word',]
+    search_fields = ('word',)
 
 
 admin.site.register(Words, WordsAdmin)
