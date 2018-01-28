@@ -1,0 +1,81 @@
+# -*- coding: utf-8 -*-
+
+import hashlib
+import random
+from datetime import datetime
+from django.utils.text import slugify
+
+
+def slugify_ru(text):
+    TRANSLIT_ALPHABET = (
+        (u"А", u"A"),
+        (u"Б", u"B"),
+        (u"В", u"V"),
+        (u"Г", u"G"),
+        (u"Д", u"D"),
+        (u"Е", u"E"),
+        (u"Ё", u"Jo"),
+        (u"Ж", u"Zh"),
+        (u"З", u"Z"),
+        (u"И", u"I"),
+        (u"Й", u"J"),
+        (u"К", u"K"),
+        (u"Л", u"L"),
+        (u"М", u"M"),
+        (u"Н", u"N"),
+        (u"О", u"O"),
+        (u"П", u"P"),
+        (u"Р", u"R"),
+        (u"С", u"S"),
+        (u"Т", u"T"),
+        (u"У", u"U"),
+        (u"Ф", u"F"),
+        (u"Х", u"H"),
+        (u"Ц", u"C"),
+        (u"Ч", u"Ch"),
+        (u"Ш", u"Sh"),
+        (u"Щ", u"Shh"),
+        (u"Ъ", u""),
+        (u"Ы", u"Y"),
+        (u"Ь", u""),
+        (u"Э", u"Je"),
+        (u"Ю", u"Ju"),
+        (u"Я", u"Ja"),
+        (u"а", u"a"),
+        (u"б", u"b"),
+        (u"в", u"v"),
+        (u"г", u"g"),
+        (u"д", u"d"),
+        (u"е", u"e"),
+        (u"ё", u"jo"),
+        (u"ж", u"zh"),
+        (u"з", u"z"),
+        (u"и", u"i"),
+        (u"й", u"j"),
+        (u"к", u"k"),
+        (u"л", u"l"),
+        (u"м", u"m"),
+        (u"н", u"n"),
+        (u"о", u"o"),
+        (u"п", u"p"),
+        (u"р", u"r"),
+        (u"с", u"s"),
+        (u"т", u"t"),
+        (u"у", u"u"),
+        (u"ф", u"f"),
+        (u"х", u"h"),
+        (u"ц", u"c"),
+        (u"ч", u"ch"),
+        (u"ш", u"sh"),
+        (u"щ", u"shh"),
+        (u"ь", u""),
+        (u"ы", u"y"),
+        (u"ъ", u""),
+        (u"э", u"je"),
+        (u"ю", u"ju"),
+        (u"я", u"ja"),
+    )
+
+    for symb_in, symb_out in TRANSLIT_ALPHABET:
+        text = text.replace(symb_in, symb_out).lower()
+    return slugify(text)

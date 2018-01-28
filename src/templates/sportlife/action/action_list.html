@@ -1,0 +1,18 @@
+{% extends "sportlife/base.html" %}
+{% block title %}My action list{% endblock %}
+
+{% block content %}
+<h1>My action list</h1>
+
+{% for action in actions %}
+<h2>
+    <a href="{{ action.get_absolute_url }}">{{ action.title }}</a>
+</h2>
+
+<p class="date">
+Updated {{ action.updated }} by {{ action.author }}
+</p>
+
+{{ action.description|truncatewords:30|linebreaks }}
+{% endfor %}
+{% endblock %}
