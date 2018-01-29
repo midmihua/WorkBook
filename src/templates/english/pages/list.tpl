@@ -1,48 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>List of English words</title>
-    <style>
-        table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        }
-        th, td {
-        padding: 10px;
-        }
-    </style>
-</head>
-<body>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<p>List of words</p>
+{% block title %} English notebook {% endblock %}
 
-<p><a href="{% url 'english:add_words' %}">New word</a></p>
 
-<table style="width:100%">
+{% block content %}
+
+
+<div class="welcome-gridsinfo">
+    <a href="{% url 'english:add_words' %}"><b>[Add New]</b></a>
+</div>
+
+<div class="col-lg-6 in-gp-tb">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div>
+</div>
+
+<table class="table table-striped">
     <tr>
-      <th>word_id</th>
-      <th>word</th>
-      <th>translation</th>
-      <th>comment</th>
-      <th>create_date</th>
-      <th>update_date</th>
-      <th></th>
+      <th>ID (edit)</th>
+      <th>Word</th>
+      <th>Translation</th>
+      <th>Comment</th>
+      <th>Update date</th>
+      <th>(delete)</th>
   </tr>
 {% for word in list_of_words %}
     <tr>
-        <td><a href="{% url 'english:edit_words' word.id %}">{{ word.id }}</a></td>
+        <td><a href="{% url 'english:edit_words' word.id %}" class="badge">{{ word.id }}</a></td>
         <td>{{ word.word }}</td>
         <td>{{ word.translation }}</td>
         <td>{{ word.comment }}</td>
-        <td>{{ word.create_date }}</td>
         <td>{{ word.update_date }}</td>
-        <td><a href="{% url 'english:delete_words' word.id %}">[x]</a></td>
+        <td><a href="{% url 'english:delete_words' word.id %}" class="badge">[x]</a></td>
     </tr>
 {% endfor %}
 </table>
 
-<p><a href="{% url 'english:add_words' %}">New word</a></p>
+<br/>
 
-</body>
-</html>
+{% endblock %}
