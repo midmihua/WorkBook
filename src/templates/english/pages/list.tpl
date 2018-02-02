@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block title %} English notebook {% endblock %}
-
+{% block title %} English notebook - list of words {% endblock %}
 
 {% block content %}
 
+<div class="container">
 
 <div class="welcome-gridsinfo">
     <a href="{% url 'english:add_words' %}"><b>[ Add new word ]</b></a>
@@ -41,6 +41,28 @@
 {% endfor %}
 </table>
 
-<br/>
+{% if list_of_words.has_other_pages %}
+  <ul class="pagination">
+    {% if list_of_words.has_previous %}
+      <li><a href="?page={{ list_of_words.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in list_of_words.paginator.page_range %}
+      {% if list_of_words.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if list_of_words.has_next %}
+      <li><a href="?page={{ list_of_words.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+</div>
 
 {% endblock %}

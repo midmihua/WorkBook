@@ -25,6 +25,7 @@ SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+# DEBUG = True
 
 ALLOWED_HOSTS = ['165.227.129.246', 'midmih.win', 'www.midmih.win']
 # ALLOWED_HOSTS = []
