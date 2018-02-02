@@ -1,47 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>List of English words</title>
-    <style>
-        table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        }
-        th, td {
-        padding: 10px;
-        }
-    </style>
-</head>
-<body>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<p>Delete word</p>
+{% block title %} English notebook - delete page {% endblock %}
 
 {% block content %}
 
+<div class="container">
+<div class="contact-info cf-1">
+<div class="contact-info-grids">
+
 <form action="#" method="post">
     {% csrf_token %}
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Word</th>
-        </tr>
-        {{ form.management_form }}
-        <tr>
-            <td> {{ id }} </td>
-            <td> {{ form.word }} </td>
-        </tr>
-    </table>
-
-    <br>
-
-    <p>Are you sure?</p>
-
-    <input type="submit" value="Delete">
-
-    <br>
-    <p><a href="{% url 'english:list_words' %}">Return to the list</a></p>
-
+    {{ form.management_form }}
+    {{ form.word }}
+    <input type="submit" value="DELETE THE WORD?"> / <a href="{% url 'english:list_words' %}">Return to the list</a>
 </form>
 
+</div>
+</div>
+</div>
+
 {% endblock %}
+
+
+

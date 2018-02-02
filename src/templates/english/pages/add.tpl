@@ -1,46 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>List of English words</title>
-    <style>
-        table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        }
-        th, td {
-        padding: 10px;
-        }
-    </style>
-</head>
-<body>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-<p>New word</p>
+{% block title %} English notebook - add new {% endblock %}
 
 {% block content %}
 
+<div class="container">
+<div class="contact-info cf-1">
+<div class="contact-info-grids">
+
 <form action="{% url 'english:add_words' %}" method="post">
-    {% csrf_token %}
-    <table>
-        <tr>
-            <th>Word</th>
-            <th>Translation</th>
-            <th>Comment</th>
-        </tr>
-        {{ form.management_form }}
-        <tr>
-            <td> {{ form.word }} </td>
-            <td> {{ form.translation }} </td>
-            <td> {{ form.comment }} </td>
-        </tr>
-    </table>
-
-    <br>
-    <input type="submit" value="Add">
-
-    <br>
-    <p><a href="{% url 'english:list_words' %}">Return to the list</a></p>
-
+{% csrf_token %}
+	<input type="text" placeholder="New word" name="word" required maxlength="1000" id="id_word" >
+	<input type="text" placeholder="Translation" name="translation" required id="id_translation">
+	<textarea placeholder="Comment" name="comment" id="id_comment"></textarea>
+	<input type="submit" value="SAVE NEW WORD"> / <a href="{% url 'english:list_words' %}">Return to the list</a>
 </form>
+
+</div>
+</div>
+</div>
 
 {% endblock %}

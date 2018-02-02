@@ -8,7 +8,7 @@
 
 
 <div class="welcome-gridsinfo">
-    <a href="{% url 'english:add_words' %}"><b>[Add New]</b></a>
+    <a href="{% url 'english:add_words' %}"><b>[ Add new word ]</b></a>
 </div>
 
 <div class="col-lg-6 in-gp-tb">
