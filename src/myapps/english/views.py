@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from myapps.decorators import render_to
 
@@ -8,7 +9,18 @@ from .forms import AddNewWord, EditWord, DeleteWord
 
 @render_to('english/pages/list.tpl')
 def list_words(request):
-    list_of_words = Words.objects.all().order_by('word')
+    words = Words.objects.all().order_by('word')
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(words, 30)
+
+    try:
+        list_of_words = paginator.page(page)
+    except PageNotAnInteger:
+        list_of_words = paginator.page(1)
+    except EmptyPage:
+        list_of_words = paginator.page(paginator.num_pages)
+
     return {
         'list_of_words': list_of_words
     }
