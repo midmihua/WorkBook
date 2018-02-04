@@ -11,14 +11,18 @@
     <a href="{% url 'english:add_words' %}"><b>[ Add new word ]</b></a>
 </div>
 
+<form action="" method="post">
+{% csrf_token %}
 <div class="col-lg-6 in-gp-tb">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for...">
+      <input name="search_word" type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
+        <button class="btn btn-default" type="submit">Go!</button>
       </span>
     </div>
 </div>
+
+</form>
 
 <table class="table table-striped">
     <tr>
