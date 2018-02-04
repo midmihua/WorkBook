@@ -9,7 +9,12 @@ from .forms import AddNewWord, EditWord, DeleteWord
 
 @render_to('english/pages/list.tpl')
 def list_words(request):
-    words = Words.objects.all().order_by('word')
+
+    # Search field implementation
+    if (request.POST.get('search_word') is None) or (len(request.POST.get('search_word')) <= 0):
+        words = Words.objects.all().order_by('word')
+    else:
+        words = Words.objects.filter(word__icontains=request.POST.get('search_word')).order_by('word')
 
     page = request.GET.get('page', 1)
     paginator = Paginator(words, 30)
