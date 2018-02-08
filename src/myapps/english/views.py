@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 
 from myapps.decorators import render_to
 
@@ -32,6 +33,7 @@ def list_words(request):
 
 
 @render_to('english/pages/add.tpl')
+@login_required()
 def add_words(request):
     form = AddNewWord(request.POST or None)
     if request.method == 'POST':
@@ -46,6 +48,7 @@ def add_words(request):
 
 
 @render_to('english/pages/edit.tpl')
+@login_required()
 def edit_words(request, word_id):
     word = get_object_or_404(Words, pk=word_id)
     form = EditWord(request.POST or None, instance=word)
@@ -61,6 +64,7 @@ def edit_words(request, word_id):
 
 
 @render_to('english/pages/delete.tpl')
+@login_required()
 def delete_words(request, word_id):
     word = get_object_or_404(Words, pk=word_id)
     form = DeleteWord(request.POST or None, instance=word)

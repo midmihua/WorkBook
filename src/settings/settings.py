@@ -133,3 +133,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, '..', 'public/static'),
 )
+
+# Login block
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/english/'
+LOGOUT_REDIRECT_URL = '/english/'
