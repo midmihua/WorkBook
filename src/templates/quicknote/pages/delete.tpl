@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block title %} English notebook - delete page {% endblock %}
+{% block title %} Quick Note - delete note {% endblock %}
 
 {% block content %}
 
@@ -12,8 +12,8 @@
 <form action="#" method="post">
     {% csrf_token %}
     {{ form.management_form }}
-    {{ form.word }}
-    <input type="submit" value="DELETE THE WORD?"> / <a href="{% url 'english:list_words' %}">Return to the list</a>
+    {{ form.note }}
+    <input type="submit" value="DELETE THE WORD?"> / <a href="{% url 'quicknote:list_notes' %}">Return to the list</a>
 </form>
 
 </div>

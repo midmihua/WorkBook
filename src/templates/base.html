@@ -52,7 +52,7 @@
 							<ul class="nav navbar-nav navbar-right margin-top cl-effect-2">
 								<li><a href="{% url 'english:list_words' %}"><span data-hover="Gallery">English</span></a></li>
 								<li><a href="#"><span data-hover="Gallery">Sport Life</span></a></li>
-								<li><a href="#"><span data-hover="Gallery">Quick Note</span></a></li>
+								<li><a href="{% url 'quicknote:list_notes' %}"><span data-hover="Gallery">Quick Note</span></a></li>
 							</ul>
 							<div class="clearfix"> </div>
 						</div><!-- /.navbar-collapse -->
@@ -112,9 +112,9 @@
 		<div class="container">
 			<div class="col-md-6 footer-left">
 				<ul>
-					<li><a href="#">English</a></li>
+					<li><a href="{% url 'english:list_words' %}">English</a></li>
 					<li><a href="#">Sport Life</a></li>
-                    <li><a href="#">Quick Note</a></li>
+                    <li><a href="{% url 'quicknote:list_notes' %}">Quick Note</a></li>
 				</ul>
 			</div>
 			<div class="col-md-3 footer-middle">
