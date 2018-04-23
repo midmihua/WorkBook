@@ -3,6 +3,8 @@
 
 {% block title %} Quick Note - list of notes {% endblock %}
 
+{% block pagename %} Quick note {% endblock %}
+
 {% block content %}
 
 <div class="container">

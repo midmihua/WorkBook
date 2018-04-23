@@ -3,6 +3,8 @@
 
 {% block title %} English notebook - list of words {% endblock %}
 
+{% block pagename %} English {% endblock %}
+
 {% block content %}
 
 <div class="container">

@@ -53,6 +53,7 @@
 								<li><a href="{% url 'english:list_words' %}"><span data-hover="Gallery">English</span></a></li>
 								<li><a href="#"><span data-hover="Gallery">Sport Life</span></a></li>
 								<li><a href="{% url 'quicknote:list_notes' %}"><span data-hover="Gallery">Quick Note</span></a></li>
+								<li><a href="{% url 'crypto:stat_view' %}"><span data-hover="Gallery">Crypto</span></a></li>
 							</ul>
 							<div class="clearfix"> </div>
 						</div><!-- /.navbar-collapse -->
@@ -96,7 +97,7 @@
 <!-- Top Navigation -->
 <div class="banner banner5">
 	<div class="container">
-	<h2>English</h2>
+	<h2>{% block pagename %}{% endblock %}</h2>
 	</div>
 </div>
 <!--header-->
@@ -115,6 +116,7 @@
 					<li><a href="{% url 'english:list_words' %}">English</a></li>
 					<li><a href="#">Sport Life</a></li>
                     <li><a href="{% url 'quicknote:list_notes' %}">Quick Note</a></li>
+					<li><a href="{% url 'crypto:stat_view' %}">Crypto</a></li>
 				</ul>
 			</div>
 			<div class="col-md-3 footer-middle">
