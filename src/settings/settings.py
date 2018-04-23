@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'myapps.english',
     'myapps.sportlife',
     'myapps.quicknote',
+    'myapps.crypto',
 ]
 
 MIDDLEWARE = [

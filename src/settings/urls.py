@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^$', auth_view.login, {'template_name': 'base.html'}, name='login'),
     # url(r'^logout/$', auth_view.logout, {'next_page': '/english/'}, name='logout'),
     url(r'^logout/$', auth_view.logout, name='logout'),
+    url(r'^crypto/', include('myapps.crypto.urls', namespace='crypto')),
 ]
