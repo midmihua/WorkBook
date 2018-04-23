@@ -1,37 +1,84 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
-from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
-
-
-class ActiveManager(models.Manager):
-    def get_queryset(self):
-        return super(ActiveManager, self).get_queryset().filter(status='active')
 
 
 class Action(models.Model):
 
-    ACTION_STATUS = (
-        ('active', 'Active'),
-        ('inactive', 'Inactive'),
-    )
-
-    title = models.CharField(max_length=512, null=False, blank=False)
-    slug = models.SlugField(max_length=512)
-    author = models.ForeignKey(User, related_name='actions')
-    description = models.TextField(null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10, choices=ACTION_STATUS, default='active')
+    action = models.CharField(max_length=256, blank=False, null=False, unique=True)
+    description = models.TextField(max_length=1000, blank=True, null=True)
+    update_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('title',)
+        verbose_name = 'Action'
+        verbose_name_plural = 'Actions'
 
     def __str__(self):
-        return self.title
+        return self.action
 
-    def get_absolute_url(self):
-        return reverse('sportlife: action_detail', args=[self.title])
 
-    objects = models.Manager()
-    active = ActiveManager()
+class Day(models.Model):
 
+    day = models.CharField(max_length=50, null=False, blank=False, unique=True)
+    update_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Day'
+        verbose_name_plural = 'Day'
+
+    def __str__(self):
+        return self.day
+
+
+class DayList(models.Model):
+
+    day = models.ForeignKey(Day, on_delete=models.CASCADE)
+    action = models.ForeignKey(Action, on_delete=models.CASCADE)
+    update_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'DayList'
+        verbose_name_plural = 'DayLists'
+
+    def __str__(self):
+        return self.day
+
+
+class Program(models.Model):
+
+    program = models.CharField(max_length=100, null=False, blank=False, unique=True)
+    description = models.TextField(max_length=1000, blank=True, null=True)
+    update_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Program'
+        verbose_name_plural = 'Programs'
+
+    def __str__(self):
+        return self.program
+
+
+class ProgramList(models.Model):
+
+    variant = (
+        ('HA', 'Hard'),
+        ('ME', 'Medium'),
+        ('LI', 'Light')
+    )
+
+    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    day = models.ForeignKey(Day, on_delete=models.CASCADE)
+    level = models.CharField(max_length=2, choices=variant, default='ME')
+    update_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'ProgramList'
+        verbose_name_plural = 'ProgramLists'
+
+    def __str__(self):
+        return self.program + '_' + self.day
+
+
+class Execution(models.Model):
+
+    pass
