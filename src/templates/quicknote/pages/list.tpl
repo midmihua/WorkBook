@@ -35,7 +35,7 @@
 {% for note in notes %}
     <tr>
         <td><a href="{% url 'quicknote:edit_note' note.id %}" class="badge">{{ note.id }}</a></td>
-        <td>{{ note.note }}</td>
+        <td>{% autoescape off %} {{ note.note }} {% endautoescape %}</td>
         <td>{{ note.file }}</td>
         <td>{{ note.update_date }}</td>
         <td><a href="{% url 'quicknote:delete_note' note.id %}" class="badge">[x]</a></td>
