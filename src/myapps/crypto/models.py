@@ -40,7 +40,7 @@ class Pair(Basic):
 
 class Stat(Basic):
 
-    variants = (
+    VARIANTS = (
         ('KLINE_INTERVAL_1MINUTE', '1m'),
         ('KLINE_INTERVAL_3MINUTE', '3m'),
         ('KLINE_INTERVAL_5MINUTE', '5m'),
@@ -60,7 +60,10 @@ class Stat(Basic):
 
     market = models.ForeignKey(Market, on_delete=models.CASCADE)
     pair = models.ForeignKey(Pair, on_delete=models.CASCADE)
-    interval = models.CharField(max_length=25, choices=variants, default='KLINE_INTERVAL_5MINUTE')
+    interval = models.CharField(max_length=25, choices=VARIANTS, default='KLINE_INTERVAL_5MINUTE')
+
+    def get_interval(self):
+        return dict(Stat.VARIANTS)[str(self.interval)]
 
     class Meta:
         verbose_name = 'Stat'
