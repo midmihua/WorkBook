@@ -1,33 +1,36 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load customtags %}
 
 {% block title %} Crypto - all markets and coins {% endblock %}
-
 {% block pagename %} Crypto (app v.1) {% endblock %}
 
 {% block content %}
 
 <div class="container">
-
 <div class="welcome-gridsinfo"></div>
 
 <table class="table table-striped">
     <tr>
-      <th>ID (edit)</th>
+      <th>Edit</th>
       <th>Market</th>
+      <th><font color="blue">Status</font></th>
       <th>Pair</th>
+      <th><font color="blue">Status</font></th>
       <th>Interval</th>
       <th>Last update</th>
-      <th>See details</th>
+      <th>Details</th>
   </tr>
 {% for stat in stats %}
     <tr>
-        <td><a href="#" class="badge">{{ stat.id }}</a></td>
+        <td><a href="{% url 'crypto:edit' stat.id %}" class="badge">{{ stat.id }}</a></td>
         <td>{{ stat.market }}</td>
+        <td>{{ market_status }}</td>
         <td>{{ stat.pair }}</td>
-        <td>{{ stat.interval }}</td>
+        <td>{{ pair_info|hash:stat.pair }}</td>
+        <td>{{ stat.get_interval }}</td>
         <td>{{ stat.update_date }}</td>
-        <td><a href="#" class="badge">(?)</a></td>
+        <td><a href="{% url 'crypto:details' stat.pair.id %}" class="badge">(?)</a></td>
     </tr>
 {% endfor %}
 </table>
