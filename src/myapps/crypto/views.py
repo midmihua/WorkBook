@@ -1,11 +1,10 @@
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib.auth.decorators import login_required
 
 from myapps.decorators import render_to
 
 from .models import Stat, Pair
-from myapps.crypto.markets.binan import Binance
+from myapps.crypto.markets.binan.api import Binance
 
 import pandas as pd
 

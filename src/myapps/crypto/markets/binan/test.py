@@ -1,6 +1,4 @@
-from myapps.crypto.markets.binan import Binance
-from myapps.crypto.markets.graph import *
-
+from myapps.crypto.markets.binan.api import Binance
 
 cl = Binance('STORJBTC')
 

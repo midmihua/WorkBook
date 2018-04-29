@@ -2,6 +2,7 @@
 *.pyc
 *.py~
 *.tpl~
+*.log
 
 .idea
 .vagrant
@@ -15,3 +16,4 @@ dump
 # static
 _config.py
 design
+live.sh
