@@ -1,0 +1,8 @@
+/etc/crontab
+crontab -u user -l
+crontab -u user -e
+crontab -u user -r
+
+service cron status
+
+*/5 * * * * /home/path/to/file/refresh.sh
