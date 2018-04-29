@@ -11,44 +11,90 @@
 
 <table class="table table-striped">
     <tr>
-      <th><font color="blue">symbol</font></th>
-      <th>{{ pair_info.symbol }}</th>
+      <th>Pair</th>
+      <th>Status</th>
+      <th>Interval</th>
+      <th>Period</th>
+      <th>Notification</th>
+      <th>Last update</th>
     </tr>
     <tr>
-      <th><font color="blue">baseAsset</font></th>
-      <th>{{ pair_info.baseAsset }}</th>
-    </tr>
-    <tr>
-      <th><font color="blue">quoteAsset</font></th>
-      <th>{{ pair_info.quoteAsset }}</th>
-    </tr>
-    <tr>
-      <th><font color="blue">orderTypes</font></th>
-      <th>{{ pair_info.orderTypes }}</th>
-    </tr>
-    <tr>
-      <th><font color="blue">filters</font></th>
-      <th>{{ pair_info.filters }}</th>
-    </tr>
-    <tr>
-      <th><font color="blue">status</font></th>
-      <th>{{ pair_info.status }}</th>
+      <td>{{ pair.pair }}</td>
+      <td>{{ pair.get_status }}</td>
+      <td>{{ pair.get_interval }}</td>
+      <td>{{ pair.get_period }}</td>
+      <td>{{ pair.get_notification }}</td>
+      <td>{{ pair.update_date }}</td>
     </tr>
 </table>
 
 <div class="contact-info-grids">
 
-<table>
-{%for line in pair_hist %}
-<tr>
-    <th>{{ line }}</th>
-</tr>
-{% endfor %}
+<table class="table table-striped">
+    <tr>
+      <th>From</th>
+      <th>To</th>
+      <th>Current status</th>
+    </tr>
+    <tr>
+      <td>{{ rules.first.get_start_data }}</td>
+      <td>{{ rules.first.get_end_data }}</td>
+      <td>{{ rules.first.get_res_data }}</td>
+    </tr>
 </table>
 
 <div class="contact-info-grids">
 
-<a href="{% url 'crypto:stat_view' %}">Return to the list</a>
+<p align="center"><b>RAW DATA</b></p>
+
+<table class="table table-striped">
+    <tr>
+      <th>Pair information</th>
+    </tr>
+    <tr>
+      <td>{{ pair.pair_info }}</td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <tr>
+      <th>24 hour price change statistics</th>
+    </tr>
+    <tr>
+      <td>{{ pair.get_24h_ticker }}</td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <tr>
+      <th>Historical Klines (Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time)</th>
+    </tr>
+    <tr>
+      <td>{{ pair.historical_candlesticks }}</td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <tr>
+      <th>Market depth (Order Book for the market, rows: default 100; max 1000)</th>
+    </tr>
+    <tr>
+      <td>{{ pair.market_depth }}</td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <tr>
+      <th>Recent trades (up to last 500)</th>
+    </tr>
+    <tr>
+      <td>{{ pair.recent_trades }}</td>
+    </tr>
+</table>
+
+<div class="contact-info-grids">
+
+<a href="{% url 'crypto:stat_view' %}">Return to previous page</a>
 
 </div>
 </div>

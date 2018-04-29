@@ -1,6 +1,10 @@
 # Issue with migrate
+
 python manage.py migrate --fake APPNAME zero
 python manage.py migrate APPNAME
+
+python manage.py makemigrations APPNAME
+python manage.py migrate --fake-initial
 
 # User permission
 chown -R group:user *objects*
@@ -27,3 +31,22 @@ As you update your configuration or application, you will likely need to restart
 
     sudo nginx -t && sudo systemctl restart nginx
 
+# PostgreSQL
+
+## Switch to db user
+sudo -u postgres psql
+
+## List database
+\l
+
+## Connect to database
+\c database_name
+
+## List tables
+\d
+
+## Drop table (CASCADE)
+drop table department, company;
+
+## Exit
+\q

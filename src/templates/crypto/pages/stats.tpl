@@ -13,24 +13,24 @@
 <table class="table table-striped">
     <tr>
       <th>Edit</th>
-      <th>Market</th>
-      <th><font color="blue">Status</font></th>
       <th>Pair</th>
-      <th><font color="blue">Status</font></th>
+      <th>Status</th>
       <th>Interval</th>
+      <th>Period</th>
+      <th>Send notification</th>
       <th>Last update</th>
       <th>Details</th>
   </tr>
 {% for stat in stats %}
     <tr>
         <td><a href="{% url 'crypto:edit' stat.id %}" class="badge">{{ stat.id }}</a></td>
-        <td>{{ stat.market }}</td>
-        <td>{{ market_status }}</td>
         <td>{{ stat.pair }}</td>
-        <td>{{ pair_info|hash:stat.pair }}</td>
+        <td>{{ stat.get_status }}</td>
         <td>{{ stat.get_interval }}</td>
+        <td>{{ stat.get_period }}</td>
+        <td>{{ stat.get_notification }}</td>
         <td>{{ stat.update_date }}</td>
-        <td><a href="{% url 'crypto:details' stat.pair.id %}" class="badge">(?)</a></td>
+        <td><a href="{% url 'crypto:details' stat.id %}" class="badge">(?)</a></td>
     </tr>
 {% endfor %}
 </table>

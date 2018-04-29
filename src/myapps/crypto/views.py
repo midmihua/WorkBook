@@ -3,29 +3,18 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from myapps.decorators import render_to
 
-from .models import Stat, Pair
-from myapps.crypto.markets.binan.api import Binance
-
-import pandas as pd
+from .models import Stat, RuleMap
 
 
-# Instance of Binance market
-cl = Binance()
+# Constants
+STATUS_ACTIVE = 'AC'
 
 
 @render_to('crypto/pages/stats.tpl')
 def stat_view(request):
 
     # Retrieve all stats objects
-    all_markets_coins = Stat.objects.all().order_by('market').order_by('pair')
-
-    # Get Binance status
-    market_status = cl.ping_server()
-
-    # Get Pair information
-    pair_info = dict()
-    for market in all_markets_coins:
-        pair_info[market.pair] = cl.get_pair_status(market.pair)
+    all_markets_coins = Stat.objects.filter(status=STATUS_ACTIVE).order_by('pair')
 
     # Pagination
     page = request.GET.get('page', 1)
@@ -40,34 +29,26 @@ def stat_view(request):
 
     return {
         'stats': one_page_stats,
-        'market_status': market_status,
-        'pair_info': pair_info,
-    }
-
-
-# TBD
-@render_to('crypto/pages/edit.tpl')
-def edit(request, pair_id):
-    return {
-        'form': 'TBD: ' + pair_id
     }
 
 
 @render_to('crypto/pages/details.tpl')
 def details(request, pair_id):
 
-    pair = get_object_or_404(Pair, pk=pair_id)
-
-    # Get Pair info
-    pair_info = cl.get_pair_info(str(pair))
-
-    # Get Pair history
-    # Debug
-    history = cl.get_historical_klines(str(pair), '30m', '4 hour ago UTC')
-    pair_hist = pd.DataFrame(history)
-    print(pair_hist)
+    pair = get_object_or_404(Stat, pk=pair_id)
+    # temporary
+    rules = RuleMap.objects.filter(stat=pair_id)
 
     return {
-        'pair_info': pair_info,
-        'pair_hist': history,
+        'pair': pair,
+        'rules': rules
+    }
+
+
+# TBD
+@render_to('crypto/pages/edit.tpl')
+def edit(request, pair_id):
+
+    return {
+        'form': 'not implemented yet: ' + pair_id
     }

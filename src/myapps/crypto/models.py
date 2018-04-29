@@ -111,6 +111,55 @@ class Stat(Basic):
     def get_notification(self):
         return dict(Stat.NOTIFICATION)[str(self.notification)]
 
+    def get_status(self):
+        return self.pair_info['status']
+
+    def get_24h_ticker(self):
+        return self._24h_ticker
+
+    def __str__(self):
+        return self.pair.__str__()
+
     class Meta:
         verbose_name = 'Stat'
         verbose_name_plural = 'Stats'
+
+
+class Rule(Basic):
+
+    rule = models.CharField(max_length=255, null=False, blank=False, unique=True)
+
+    class Meta:
+        verbose_name = 'Rule'
+        verbose_name_plural = 'Rules'
+
+    def __str__(self):
+        return self.rule
+
+    def save(self, *args, **kwargs):
+        self.rule = self.rule.lower()
+        return super(Rule, self).save(*args, **kwargs)
+
+
+class RuleMap(Basic):
+
+    stat = models.ForeignKey(Stat, on_delete=models.CASCADE)
+    rule = models.ForeignKey(Rule, on_delete=models.CASCADE)
+    result = JSONField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'RuleMap'
+        verbose_name_plural = 'RuleMaps'
+        unique_together = (('stat', 'rule'),)
+
+    def get_start_data(self):
+        return self.result['start']
+
+    def get_end_data(self):
+        return self.result['end']
+
+    def get_res_data(self):
+        return self.result['res']
+
+    def __str__(self):
+        return '{0}: {1}'.format(self.stat, self.rule)
