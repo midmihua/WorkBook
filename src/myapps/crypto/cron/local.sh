@@ -10,6 +10,7 @@ cd ${HOME_START_POINT}
 
 source ${VENV_START_POINT}
 python manage.py update
+python manage.py calculate
 deactivate
 
 echo "$(date "+%m%d%Y %H:%M:%S") : end" >> ${LOGS_START_POINT} 2>&1
