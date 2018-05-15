@@ -23,11 +23,14 @@ class TCUserMedia(models.Model):
 
     username = models.ForeignKey(TCUser, on_delete=models.CASCADE)
     update_date = models.DateTimeField(auto_now=True)
+    media_id = models.CharField(max_length=255, null=True, blank=True)
+    media_tags = JSONField(null=True, blank=True)
     media = JSONField(null=True, blank=True)
 
     class Meta:
         verbose_name = 'TCUserMedia'
         verbose_name_plural = 'TCUserMedias'
+        unique_together = (('username', 'media_id'),)
 
     def __str__(self):
         return self.username.__str__() + '#' + str(self.pk)

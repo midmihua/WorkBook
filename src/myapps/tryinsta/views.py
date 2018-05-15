@@ -30,7 +30,7 @@ def users(request):
 @render_to('tryinsta/pages/media.tpl')
 def user_media(request, tc_user_id):
 
-    media = get_object_or_404(TCUserMedia, username_id=tc_user_id)
+    media = TCUserMedia.objects.filter(username_id=tc_user_id)
 
     return {
         'media': media,

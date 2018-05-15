@@ -13,14 +13,20 @@
 <table class="table table-striped">
     <tr>
       <th>Username</th>
-      <th>Media</th>
+      <th>id</th>
+      <th>tags</th>
+      <th>media</th>
       <th>Updated</th>
   </tr>
+{% for med in media %}
     <tr>
-        <td>{{ media.username }}</a></td>
-        <td>{{ media.media }}</td>
-        <td>{{ media.update_date }}</td>
+        <td>{{ med.username }}</a></td>
+        <td>{{ med.media_id }}</td>
+        <td>{{ med.media_tags }}</td>
+        <td>{{ med.media }}</td>
+        <td>{{ med.update_date }}</td>
     </tr>
+{% endfor %}
 </table>
 
 </div>

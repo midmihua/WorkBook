@@ -14,9 +14,9 @@ class TCUserAdmin(admin.ModelAdmin):
 
 class TCUserMediaAdmin(admin.ModelAdmin):
 
-    list_display = ['username', 'media', 'update_date']
+    list_display = ['username', 'media_id', 'media_tags', 'media', 'update_date']
     list_filter = ['username']
-    search_fields = ('username', 'media')
+    search_fields = ('username', 'media_id')
 
 
 admin.site.register(TCUser, TCUserAdmin)
