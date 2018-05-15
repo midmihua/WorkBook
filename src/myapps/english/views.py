@@ -8,7 +8,7 @@ from .models import Words
 from .forms import AddNewWord, EditWord, DeleteWord
 
 
-@render_to('english/pages/list.tpl')
+@render_to('english/pages/users.tpl')
 def list_words(request):
 
     # Search field implementation

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'myapps.sportlife',
     'myapps.quicknote',
     'myapps.crypto',
+    'myapps.tryinsta',
 ]
 
 MIDDLEWARE = [
