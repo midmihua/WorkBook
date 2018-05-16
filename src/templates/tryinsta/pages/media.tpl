@@ -17,6 +17,7 @@
       <th>tags</th>
       <th>media</th>
       <th>Updated</th>
+      <th>Image</th>
   </tr>
 {% for med in media %}
     <tr>
@@ -25,6 +26,7 @@
         <td>{{ med.media_tags }}</td>
         <td>{{ med.media }}</td>
         <td>{{ med.update_date }}</td>
+        <td><img src="{{ med.get_url }}"/></td>
     </tr>
 {% endfor %}
 </table>

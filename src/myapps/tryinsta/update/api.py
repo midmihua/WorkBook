@@ -1,5 +1,5 @@
-from instagram.client import InstagramAPI
-from myapps.tryinsta._conf import ACCESS_TOKEN, CLIENT_SECRET, CLIENT_ID
+# from instagram.client import InstagramAPI
+# from myapps.tryinsta._conf import ACCESS_TOKEN, CLIENT_SECRET, CLIENT_ID
 
 import requests
 from myapps.tryinsta.models import TCUser, TCUserMedia

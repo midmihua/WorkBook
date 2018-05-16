@@ -8,7 +8,7 @@ from myapps.quicknote.models import QuickNote
 from myapps.quicknote.forms import AddQuickNoteForm, EditQuickNoteForm, DeleteQuickNoteForm
 
 
-@render_to('quicknote/pages/users.tpl')
+@render_to('quicknote/pages/list.tpl')
 def list_notes(request):
 
     # Search field implementation

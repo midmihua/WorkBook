@@ -34,3 +34,6 @@ class TCUserMedia(models.Model):
 
     def __str__(self):
         return self.username.__str__() + '#' + str(self.pk)
+
+    def get_url(self):
+        return self.media['thumbnail']['url']
