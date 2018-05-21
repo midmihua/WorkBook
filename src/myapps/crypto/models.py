@@ -163,3 +163,34 @@ class RuleMap(Basic):
 
     def __str__(self):
         return '{0}: {1}'.format(self.stat, self.rule)
+
+
+class Messenger(Basic):
+
+    messenger = models.CharField(max_length=25, null=False, blank=False, unique=True)
+
+    class Meta:
+        verbose_name = 'Messenger'
+        verbose_name_plural = 'Messengers'
+
+    def __str__(self):
+        return self.messenger
+
+    def save(self, *args, **kwargs):
+        self.messenger = self.messenger.lower()
+        return super(Messenger, self).save(*args, **kwargs)
+
+
+class Notification(Basic):
+
+    rule = models.ForeignKey(RuleMap, on_delete=models.CASCADE)
+    send_to = models.ForeignKey(Messenger, on_delete=models.CASCADE)
+    condition = JSONField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Notification'
+        verbose_name_plural = 'Notifications'
+        unique_together = (('rule', 'send_to'),)
+
+    def __str__(self):
+        return '{0}'.format(self.rule)
