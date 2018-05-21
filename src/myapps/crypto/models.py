@@ -159,13 +159,22 @@ class RuleMap(Basic):
         unique_together = (('stat', 'rule'),)
 
     def get_start_data(self):
-        return self.result['start']
+        try:
+            return self.result['start']
+        except Exception:
+            return "empty"
 
     def get_end_data(self):
-        return self.result['end']
+        try:
+            return self.result['end']
+        except Exception:
+            return "empty"
 
     def get_res_data(self):
-        return self.result['res']
+        try:
+            return self.result['res']
+        except Exception:
+            return "empty"
 
     def __str__(self):
         return '{0}: {1}'.format(self.stat, self.rule)

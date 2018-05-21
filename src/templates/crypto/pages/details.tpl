@@ -30,6 +30,7 @@
 
 <div class="contact-info-grids">
 
+<!--
 <table class="table table-striped">
     <tr>
       <th>From</th>
@@ -42,6 +43,7 @@
       <td>{{ rules.first.get_res_data }}</td>
     </tr>
 </table>
+-->
 
 <div class="contact-info-grids">
 
