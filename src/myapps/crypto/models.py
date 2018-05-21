@@ -112,10 +112,16 @@ class Stat(Basic):
         return dict(Stat.NOTIFICATION)[str(self.notification)]
 
     def get_status(self):
-        return self.pair_info['status']
+        try:
+            return self.pair_info['status']
+        except Exception:
+            return "empty"
 
     def get_24h_ticker(self):
-        return self._24h_ticker
+        try:
+            return self._24h_ticker
+        except Exception:
+            return "empty"
 
     def __str__(self):
         return self.pair.__str__()
