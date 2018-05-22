@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from myapps.crypto.models import RuleMap, Rule
 from myapps.crypto.rules.list import pump_dump
 
@@ -100,22 +102,30 @@ def calc_pump_dump():
 """
 
 
-def calc_price_change_percent():
+def calc_24h_base_rules():
 
-    rule = Rule.objects.filter(rule='price_change_percent')
-    rule_map = RuleMap.objects.filter(rule=rule).filter(status=STATUS_ACTIVE)
+    # price_change_percent
+    # specific_price
 
-    if len(rule_map) > 0:
+    rules = Rule.objects.filter(
+        Q(rule='price_change_percent') | Q(rule='specific_price')
+    )
 
-        for pair_rule in rule_map:
+    if len(rules) > 0:
 
-            # Add results to database
-            obj, created = RuleMap.objects.update_or_create(
-                pk=pair_rule.id,
-                defaults={
-                    'result': pair_rule.stat._24h_ticker
-                }
-            )
+        for rule in rules:
+            rule_map = RuleMap.objects.filter(rule=rule).filter(status=STATUS_ACTIVE)
+
+            if len(rule_map) > 0:
+                for pair_rule in rule_map:
+
+                    # Add results to database
+                    obj, created = RuleMap.objects.update_or_create(
+                        pk=pair_rule.id,
+                        defaults={
+                            'result': pair_rule.stat._24h_ticker
+                        }
+                    )
 
 
 def run():
@@ -125,6 +135,6 @@ def run():
     calc_pump_dump()
     print('2. pump_dump calculation is finished')
 
-    print('3. price_change_percent calculation is started')
-    calc_price_change_percent()
-    print('4. price_change_percent calculation is finished')
+    print('3. calc_24h_base_rules calculation is started')
+    calc_24h_base_rules()
+    print('4. calc_24h_base_rules calculation is finished')
