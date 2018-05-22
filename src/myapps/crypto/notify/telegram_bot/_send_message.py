@@ -40,6 +40,20 @@ def rule_manager(rule, notify_list, **kwargs):
             if current <= target:
                 send_message = '{0}; {1}; {2}%'.format(pair, '24h_price_change', current)
 
+    elif rule == 'specific_price':
+        current = float(notify_list[0].rule.result['lastPrice'])
+        target = float(notify_list[0].condition['target'])
+        direction = str(notify_list[0].condition['direction'])
+        pair = notify_list[0].rule.stat
+
+        if str(direction).lower() == 'up':
+            if current >= target:
+                send_message = '{0}; {1}; last price {2} >= target {3}'.format(pair, 'specific_price', current, target)
+
+        elif str(direction).lower() == 'down':
+            if current <= target:
+                send_message = '{0}; {1}; last price {2} <= target {3}'.format(pair, 'specific_price', current, target)
+
     return send_message or None
 
 
